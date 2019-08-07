@@ -59,7 +59,7 @@ int main(int argc, char ** args) {
         for (i = 0; i < input_word.length(); i++) {
             cout << input_word[i];
         }
-        cout << "Playing since: " << time(NULL) - start_time << " seconds";
+        cout << endl << "Playing since: " << time(NULL) - start_time << " seconds";
         cout << endl;
         
         // Wait for input
