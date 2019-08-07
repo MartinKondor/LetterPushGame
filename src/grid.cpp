@@ -12,7 +12,7 @@ Grid::Grid(string input_word) {
     
     // Place the characters of the word to the board
     for (int i = 0; i < input_word.length(); i++) {
-        int* random_coords = this->get_random_free_coordinates(true);
+        int* random_coords = this->get_random_free_coordinates(false);
         this->letters[i] = Letter(random_coords[0], random_coords[1], input_word[i]);
         this->grid[random_coords[0]][random_coords[1]] = input_word[i];
     }
@@ -29,7 +29,7 @@ void Grid::init() {
     
     // Randomly place N obstacles on the grid
     for (int i = 0; i < N_OBSTACLE; i++) {
-        int* random_coords = this->get_random_free_coordinates(false);
+        int* random_coords = this->get_random_free_coordinates(true);
         this->grid[random_coords[0]][random_coords[1]] = OBSTACLE_CHAR;
     }
 }

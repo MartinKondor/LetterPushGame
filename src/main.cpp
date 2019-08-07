@@ -45,14 +45,14 @@ int main(int argc, char ** args) {
     
     Grid grid = Grid(input_word);
     Player player = Player(1, 1);
-    bool is_game_over = false;
-    int i = 0;
+    int i, first_y, prev_x;
+    bool is_game_over;
     
     // Start the game loop
     while (true) {
         grid.grid[player.y][player.x] = PLAYER_CHAR;
         grid.show();
-        Sleep(10);
+        Sleep(20);
         
         // Print some information
         cout << "Player: (" << player.y << ", " << player.x << ")" << endl;
@@ -69,12 +69,33 @@ int main(int argc, char ** args) {
         grid.clear();
         
         // Checking winning conditions
-        for (int i = 0; i < grid->n_letters; i++) {
-            int lx = grid->letters[i].x;
-            int ly = grid->letters[i].y;
+        prev_x = grid.letters[0].x;
+        first_y = grid.letters[0].y;
+        
+        if (prev_x + grid.n_letters < GRID_WIDTH) {
+            is_game_over = true;
+            
+            for (i = 0; i < grid.n_letters; i++) {
+                if (grid.letters[i].y != first_y) {  // If they are not in the same row
+                    is_game_over = false;
+                    break;
+                }
+                
+                if (i != 0 && grid.letters[i].x != (prev_x + 1)) {  // If they are not in the same order
+                    cout << "not in the same column " << endl;
+                    is_game_over = false;
+                    break;
+                }
+                else if (i != 0) {
+                    prev_x = grid.letters[i].x;
+                }
+            }
         }
         
         if (is_game_over) {
+            Sleep(500);
+            system("@cls");
+            
             cout << endl;
             cout << "------------------------" << endl;
             cout << "|                      |" << endl;
