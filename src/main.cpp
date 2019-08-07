@@ -82,7 +82,6 @@ int main(int argc, char ** args) {
                 }
                 
                 if (i != 0 && grid.letters[i].x != (prev_x + 1)) {  // If they are not in the same order
-                    cout << "not in the same column " << endl;
                     is_game_over = false;
                     break;
                 }
