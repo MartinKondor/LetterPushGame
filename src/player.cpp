@@ -61,7 +61,7 @@ bool Player::check_step(Grid *grid, Direction direction) {
     return true;
 }
 
-bool Player::step(Grid *grid) {
+bool Player::move(Grid *grid) {
     this->save_coord();
     
     if ((GetAsyncKeyState(VK_UP) & 0x8000) && this->y != 0) {

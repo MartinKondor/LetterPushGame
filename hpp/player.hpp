@@ -10,7 +10,7 @@ class Player {
     
     Player();
     Player(int x, int y);
-    bool step(Grid *grid);
+    bool move(Grid *grid);
     
     private:
     bool check_step(Grid *grid, Direction direction);  // true if step is right false if not

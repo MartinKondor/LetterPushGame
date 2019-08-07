@@ -35,6 +35,7 @@ enum class Direction {
 int main(int argc, char ** args) {
     srand(time(NULL));
     string input_word;
+    auto start_time = time(NULL);
     
     // Ask for input word
     cout << "Please give me a word: ";
@@ -44,8 +45,7 @@ int main(int argc, char ** args) {
     
     Grid grid = Grid(input_word);
     Player player = Player(1, 1);
-    int word_row_number = -1;
-    int word_col_number = 0;
+    bool is_game_over = false;
     int i = 0;
     
     // Start the game loop
@@ -53,31 +53,24 @@ int main(int argc, char ** args) {
         grid.grid[player.y][player.x] = PLAYER_CHAR;
         grid.show();
         
+        // Print some information
         cout << "Player: (" << player.y << ", " << player.x << ")" << endl;
         cout << "Word: ";
         for (i = 0; i < input_word.length(); i++) {
             cout << input_word[i];
         }
+        cout << "Playing since: " << time(NULL) - start_time << " seconds";
         cout << endl;
         
-        while (!player.step(&grid)) {}
+        // Wait for input
+        while (!player.move(&grid)) {}
         grid.grid[player.y][player.x] = PLAYER_CHAR;
-        
         grid.clear();
         
         // Checking winning conditions
-        word_row_number = grid.letters[0].y;
         
-        for (i = 0; i < sizeof(grid.letters) / sizeof(*grid.letters); i++) {
-            if (grid.letters[i].y != word_row_number) {
-                word_row_number = -1;
-                break;
-            }
-        }
         
-        if (false && word_row_number != -1) {
-            system("@cls");
-            
+        if (is_game_over) {
             cout << endl;
             cout << "------------------------" << endl;
             cout << "|                      |" << endl;
@@ -97,6 +90,6 @@ int main(int argc, char ** args) {
         }
     }
     
-    delete grid;
+    delete &grid;
     return 0;
 }

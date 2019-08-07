@@ -58,22 +58,23 @@ void Grid::show() {
         this->grid[this->letters[i].y][this->letters[i].x] = this->letters[i].letter;
     }
     
+    // Show the content of the grid
     for (int i = 0; i < GRID_HEIGHT; i++) {
         for (int j = 0; j < GRID_WIDTH; j++) {
             rlutil::setBackgroundColor(rlutil::GREY);
             
             if (this->grid[i][j] == PLAYER_CHAR) {
-                rlutil::setColor(rlutil::DARKGREY);
+                rlutil::setColor(rlutil::LIGHTBLUE);
                 cout << this->grid[i][j];
                 rlutil::resetColor();
             }
             else if (this->grid[i][j] == OBSTACLE_CHAR) {
-                rlutil::setColor(rlutil::GREEN);
+                rlutil::setColor(rlutil::RED);
                 cout << this->grid[i][j];
                 rlutil::resetColor();
             }
             else if (this->grid[i][j] != EMPTY_CHAR) {
-                rlutil::setColor(rlutil::RED);
+                rlutil::setColor(rlutil::GREEN);
                 cout << this->grid[i][j];
                 rlutil::resetColor();
             }
@@ -83,9 +84,12 @@ void Grid::show() {
             
             rlutil::resetColor();
         }
+        
+        // Print side walls
         cout << '|' << endl;
     }
-    
+
+    // Print the bottom walls
     for (int j = 0; j < GRID_WIDTH; j++) {
         cout << '-';
     }
@@ -104,10 +108,9 @@ void Grid::clear() {
     
     // Clear screen
     COORD Position;
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     Position.X = 0;
     Position.Y = 0;
-    SetConsoleCursorPosition(hOut, Position);
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Position);
 }
 
 Grid::~Grid() {
