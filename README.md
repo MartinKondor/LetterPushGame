@@ -9,7 +9,7 @@
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-LetterPushGame is a simple console based game built in C++ for windows.
+Simple console based game built in C++ for windows.
 
 ## How to play
 
