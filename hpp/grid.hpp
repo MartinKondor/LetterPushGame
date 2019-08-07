@@ -4,7 +4,6 @@
 class Grid {
     public:
     char grid[GRID_HEIGHT][GRID_WIDTH];
-    // vector<Letter> letters;
     Letter* letters;
     
     Grid();
@@ -15,7 +14,7 @@ class Grid {
     
     private:
     void init();
-    int* get_random_free_coordinates();
+    int* get_random_free_coordinates(bool include_sides);
 };
 
 #endif

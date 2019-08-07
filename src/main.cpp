@@ -68,7 +68,7 @@ int main(int argc, char ** args) {
         grid.clear();
         
         // Checking winning conditions
-        
+        // ...
         
         if (is_game_over) {
             cout << endl;

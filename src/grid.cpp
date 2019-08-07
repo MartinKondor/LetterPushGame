@@ -11,7 +11,7 @@ Grid::Grid(string input_word) {
     
     // Place the characters of the word to the board
     for (int i = 0; i < input_word.length(); i++) {
-        int* random_coords = this->get_random_free_coordinates();
+        int* random_coords = this->get_random_free_coordinates(true);
         this->letters[i] = Letter(random_coords[0], random_coords[1], input_word[i]);
         this->grid[random_coords[0]][random_coords[1]] = input_word[i];
     }
@@ -26,19 +26,30 @@ void Grid::init() {
     
     // Randomly place N obstacles on the grid
     for (int i = 0; i < N_OBSTACLE; i++) {
-        int* random_coords = this->get_random_free_coordinates();
+        int* random_coords = this->get_random_free_coordinates(false);
         this->grid[random_coords[0]][random_coords[1]] = OBSTACLE_CHAR;
     }
 }
 
-int* Grid::get_random_free_coordinates() {
+int* Grid::get_random_free_coordinates(bool include_sides) {
     int random_x = rand() % GRID_WIDTH;
     int random_y = rand() % GRID_HEIGHT;
     
     // Do it until it finds an empty place
-    while (this->grid[random_y][random_x] != EMPTY_CHAR && random_y != 1 && random_x != 1) {
+    while (true) {
         random_x = rand() % GRID_WIDTH;
         random_y = rand() % GRID_HEIGHT;
+        
+        if (!include_sides) {
+            if (random_x == 0 || random_y == 0 || random_y == GRID_HEIGHT - 1 || random_x == GRID_WIDTH - 1) {
+                continue;
+            }
+        }
+        
+        if (!(this->grid[random_y][random_x] != EMPTY_CHAR &&
+                random_y != 1 && random_x != 1)) {  // (1, 1) is where the player starts
+            break;
+        } 
     }
     
     return (int[]){random_y, random_x};
@@ -48,7 +59,7 @@ void Grid::show() {
     rlutil::saveDefaultColor();
     
     // Print upper walls
-    for (int j = 0; j < GRID_WIDTH; j++) {
+    for (int j = 0; j < GRID_WIDTH + 2; j++) {
         cout << '-';
     }
     cout << endl;
@@ -60,6 +71,10 @@ void Grid::show() {
     
     // Show the content of the grid
     for (int i = 0; i < GRID_HEIGHT; i++) {
+        
+        // Print the side walls
+        cout << '|';
+        
         for (int j = 0; j < GRID_WIDTH; j++) {
             rlutil::setBackgroundColor(rlutil::GREY);
             
@@ -90,7 +105,7 @@ void Grid::show() {
     }
 
     // Print the bottom walls
-    for (int j = 0; j < GRID_WIDTH; j++) {
+    for (int j = 0; j < GRID_WIDTH + 2; j++) {
         cout << '-';
     }
     cout << endl;
@@ -114,5 +129,5 @@ void Grid::clear() {
 }
 
 Grid::~Grid() {
-    
+    delete[] this->letters;
 }
