@@ -4,6 +4,7 @@
 class Grid {
     public:
     char grid[GRID_HEIGHT][GRID_WIDTH];
+    size_t n_letters;
     Letter* letters;
     
     Grid();

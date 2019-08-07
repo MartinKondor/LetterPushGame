@@ -30,10 +30,8 @@ bool Player::check_step(Grid *grid, Direction direction) {
     }
     
     // Checking letter collusion
-    for (int i = 0; i < sizeof(grid->letters) / sizeof(*grid->letters); i++) {
+    for (int i = 0; i < grid->n_letters; i++) {
         if (grid->letters[i].y == this->y && grid->letters[i].x == this->x) {
-            cout << grid->letters[i].letter << endl;
-            
             if (direction == Direction::UP && grid->letters[i].y != 0 &&
                 grid->letters[i].is_moveable(grid->grid, Direction::UP)) {
                 grid->letters[i].y--;

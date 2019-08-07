@@ -11,7 +11,7 @@
 
 LetterPushGame is a simple console based game built in C++ for windows.
 
-## Rules
+## How to play
 
 The game starts with a grid of characters on the screen, there are 3 kinds:
 

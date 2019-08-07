@@ -18,7 +18,7 @@ using std::string;
 #define OBSTACLE_CHAR '#'
 #define PLAYER_CHAR '@'
 #define EMPTY_CHAR ' '
-#define N_OBSTACLE (5 * GRID_HEIGHT * GRID_WIDTH) / 100
+#define N_OBSTACLE (4 * GRID_HEIGHT * GRID_WIDTH) / 100
 
 enum class Direction {
     UP, 
@@ -52,6 +52,7 @@ int main(int argc, char ** args) {
     while (true) {
         grid.grid[player.y][player.x] = PLAYER_CHAR;
         grid.show();
+        Sleep(10);
         
         // Print some information
         cout << "Player: (" << player.y << ", " << player.x << ")" << endl;
@@ -68,7 +69,10 @@ int main(int argc, char ** args) {
         grid.clear();
         
         // Checking winning conditions
-        // ...
+        for (int i = 0; i < grid->n_letters; i++) {
+            int lx = grid->letters[i].x;
+            int ly = grid->letters[i].y;
+        }
         
         if (is_game_over) {
             cout << endl;

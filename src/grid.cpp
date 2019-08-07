@@ -7,7 +7,8 @@ Grid::Grid() {
 
 Grid::Grid(string input_word) {
     this->init();
-    this->letters = new Letter[input_word.length()];
+    this->n_letters = input_word.length();
+    this->letters = new Letter[this->n_letters];
     
     // Place the characters of the word to the board
     for (int i = 0; i < input_word.length(); i++) {
@@ -18,6 +19,8 @@ Grid::Grid(string input_word) {
 }
 
 void Grid::init() {
+    this->n_letters = 0;
+    
     for (int i = 0; i < GRID_HEIGHT; i++) {
         for (int j = 0; j < GRID_WIDTH; j++) {
             this->grid[i][j] = EMPTY_CHAR;
@@ -65,7 +68,7 @@ void Grid::show() {
     cout << endl;
     
     // Show letters
-    for (int i = 0; i < sizeof(this->letters) / sizeof(*this->letters); i++) {
+    for (int i = 0; i < this->n_letters; i++) {
         this->grid[this->letters[i].y][this->letters[i].x] = this->letters[i].letter;
     }
     
