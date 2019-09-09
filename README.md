@@ -3,7 +3,7 @@
 </p>
 
 # LetterPushGame
-[![version](https://img.shields.io/badge/version-v1.0-green.svg)](https://github.com/MartinKondor/LetterPushGame)
+[![version](https://img.shields.io/badge/version-v1.1-green.svg)](https://github.com/MartinKondor/LetterPushGame)
 [![C++](https://img.shields.io/badge/C++-17-blue.svg)](https://github.com/MartinKondor/LetterPushGame)
 [![GitHub Issues](https://img.shields.io/github/issues/MartinKondor/LetterPushGame.svg)](https://github.com/MartinKondor/LetterPushGame/issues)
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
@@ -29,20 +29,6 @@ For example "a# bc" is not correct but "abc" is.
 
 * Windows 7/8/8.1/10 operating system
 * GCC Compiler with C++ 17
-* Make (optional)
-
-### Building or Installing
-
-Run:
-```bash
-> make build
-```
-
-Then go to the `bin` folder, and start the game with the file called `game.exe`. Or run:
-
-```bash
-> .\bin\game.exe
-```
 
 ## Deployment
 
@@ -51,7 +37,6 @@ If the building was successful and the `bin/game.exe` file were created but the 
 ## Built With
 
 * [GCC](https://gcc.gnu.org/) - Compiler used
-* [Make](https://www.gnu.org/software/make/) - Tool for running commands
 
 ## Contributing
 

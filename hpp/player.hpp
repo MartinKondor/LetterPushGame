@@ -2,20 +2,23 @@
 #define _PLAYER_HPP_
 
 class Player {
-    public:
+public:
     int x;
     int y;
-    int saved_x;
-    int saved_y;
-    
-    Player();
-    Player(int x, int y);
-    bool move(Grid *grid);
-    
-    private:
-    bool check_step(Grid *grid, Direction direction);  // true if step is right false if not
-    void save_coord();
-    void restore_coord();
+    int prev_x;
+    int prev_y;
+
+    Player(const int &x, const int &y);
+
+    /**
+    * @returns true if the update happened
+    */
+    const bool update(char grid[GRID_HEIGHT][GRID_WIDTH]);
+
+    /**
+    * @returns false if the position of the player is invalid
+    */
+    const bool check_step(char grid[GRID_HEIGHT][GRID_WIDTH], const std::string &direction);
 };
 
-#endif
+#endif // _PLAYER_HPP_

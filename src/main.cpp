@@ -1,119 +1,116 @@
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 #include <iostream>
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
-#include <windows.h>
 #include <time.h>
-#include <conio.h>
-#include "rlutil.h"
+#include <vector>
 
 using std::cout;
-using std::endl;
 using std::cin;
-using std::string;
+using std::endl;
 
-#define GRID_HEIGHT 18
-#define GRID_WIDTH 34
-
+#define GRID_HEIGHT 25
+#define GRID_WIDTH 50
 #define OBSTACLE_CHAR '#'
 #define PLAYER_CHAR '@'
 #define EMPTY_CHAR ' '
-#define N_OBSTACLE (4 * GRID_HEIGHT * GRID_WIDTH) / 100
+#define N_OBSTACLE 150
+std::string GOAL_WORD = "";
 
-enum class Direction {
-    UP, 
-    DOWN,
-    LEFT,
-    RIGHT
-};
-
-#include "letter.cpp"
-#include "grid.cpp"
+#include "../hpp/rlutil.h"
+#include "base.cpp"
 #include "player.cpp"
 
 
-int main(int argc, char ** args) {
+int main(const int argc, const char** args) {
     srand(time(NULL));
-    string input_word;
-    auto start_time = time(NULL);
-    
+    char grid[GRID_HEIGHT][GRID_WIDTH];
+    Player player;
+    int i = 0;
+
+
     // Ask for input word
-    cout << "Please give me a word: ";
-    cin >> input_word;
+    show_help();
+    cout << "Write a word here: ";
+    rlutil::saveDefaultColor();
+    rlutil::setColor(rlutil::WHITE);
+    cin >> GOAL_WORD;
+    rlutil::resetColor();
     cout << endl;
     system("@cls");
-    
-    Grid grid = Grid(input_word);
-    Player player = Player(1, 1);
-    int i, first_y, prev_x;
-    bool is_game_over;
-    
-    // Start the game loop
-    while (true) {
-        grid.grid[player.y][player.x] = PLAYER_CHAR;
-        grid.show();
-        Sleep(20);
-        
-        // Print some information
-        cout << "Player: (" << player.y << ", " << player.x << ")" << endl;
-        cout << "Word: ";
-        for (i = 0; i < input_word.length(); i++) {
-            cout << input_word[i];
-        }
-        cout << endl << "Playing since: " << time(NULL) - start_time << " seconds";
-        cout << endl;
-        
-        // Wait for input
-        while (!player.move(&grid)) {}
-        grid.grid[player.y][player.x] = PLAYER_CHAR;
-        grid.clear();
-        
-        // Checking winning conditions
-        prev_x = grid.letters[0].x;
-        first_y = grid.letters[0].y;
-        
-        if (prev_x + grid.n_letters < GRID_WIDTH) {
-            is_game_over = true;
-            
-            for (i = 0; i < grid.n_letters; i++) {
-                if (grid.letters[i].y != first_y) {  // If they are not in the same row
-                    is_game_over = false;
-                    break;
-                }
-                
-                if (i != 0 && grid.letters[i].x != (prev_x + 1)) {  // If they are not in the same order
-                    is_game_over = false;
-                    break;
-                }
-                else if (i != 0) {
-                    prev_x = grid.letters[i].x;
-                }
-            }
-        }
-        
-        if (is_game_over) {
-            Sleep(500);
-            system("@cls");
-            
-            cout << endl;
-            cout << "------------------------" << endl;
-            cout << "|                      |" << endl;
-            cout << "|      ";
-            
-            rlutil::saveDefaultColor();
-            rlutil::setColor(rlutil::LIGHTGREEN);
-            cout << "GAME OVER";
-            rlutil::resetColor();
-            
-            cout << "       |" << endl;
-            cout << "|                      |" << endl;
-            cout << "------------------------" << endl;
-            cout << endl;
-            
-            return 0;
+
+
+    // Creating the grid
+    for (i = 0; i < GRID_HEIGHT; i++) {
+        for (int j = 0; j < GRID_WIDTH; j++) {
+            grid[i][j] = EMPTY_CHAR;
         }
     }
-    
-    delete &grid;
-    return 0;
+
+
+    // Save letters
+    for (i = 0; i < GOAL_WORD.length(); i++) {
+        std::vector<int> rand_coords = get_free_coords(grid);
+        grid[rand_coords[0]][rand_coords[1]] = GOAL_WORD[i];
+    }
+
+
+    // Place obstacles to random coordinates
+    for (i = 0; i < N_OBSTACLE; i++) {
+        std::vector<int> rand_coords = get_free_coords(grid);
+        grid[rand_coords[0]][rand_coords[1]] = OBSTACLE_CHAR;
+    }
+
+
+    // Main loop
+    while (!is_win(grid)) {
+        show_grid(grid);
+        clear_grid(grid);
+        clear_screen();
+
+        // Update player's position
+        while (!player.update(grid)) {
+            if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {  // Escape is pressed down
+                return EXIT_SUCCESS;
+            }
+        }
+        grid[player.y][player.x] = PLAYER_CHAR;
+    }
+
+
+    system("@cls");
+
+    if (GOAL_WORD.length() == 1) {
+        cout << endl;
+        cout << "-------------------------" << endl;
+        cout << "|                       |" << endl;
+        cout << "|       ";
+        rlutil::saveDefaultColor();
+        rlutil::setColor(rlutil::LIGHTGREEN);
+        cout << "CHEATER";
+        rlutil::resetColor();
+        cout << "         |" << endl;
+        cout << "|                       |" << endl;
+        cout << "-------------------------" << endl;
+        cout << endl;
+    }
+    else {
+        cout << endl;
+        cout << "-------------------------" << endl;
+        cout << "|                       |" << endl;
+        cout << "|    ";
+        rlutil::saveDefaultColor();
+        rlutil::setColor(rlutil::LIGHTGREEN);
+        cout << "CONGRATULATIONS";
+        rlutil::resetColor();
+        cout << "    |" << endl;
+        cout << "|                       |" << endl;
+        cout << "-------------------------" << endl;
+        cout << endl;
+    }
+
+    system("@pause");
+    return EXIT_SUCCESS;
 }

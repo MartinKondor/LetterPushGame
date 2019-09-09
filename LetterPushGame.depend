@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1568038351 source:d:\projects\letterpushgame\src\main.cpp
+	<windows.h>
+	<iostream>
+	<string>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	<vector>
+	"../hpp/rlutil.h"
+	"base.cpp"
+	"player.cpp"
+
+1568021872 d:\projects\letterpushgame\hpp\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1568022091 d:\projects\letterpushgame\src\letter.cpp
+	"../hpp/letter.hpp"
+
+1568021872 d:\projects\letterpushgame\hpp\letter.hpp
+
+1568023361 d:\projects\letterpushgame\src\grid.cpp
+	"../hpp/grid.hpp"
+
+1568022450 d:\projects\letterpushgame\hpp\grid.hpp
+
+1568037272 d:\projects\letterpushgame\src\player.cpp
+	"../hpp/player.hpp"
+
+1568037275 d:\projects\letterpushgame\hpp\player.hpp
+
+1568037831 d:\projects\letterpushgame\src\base.cpp
+	"../hpp/base.hpp"
+
+1568036886 d:\projects\letterpushgame\hpp\base.hpp
+
