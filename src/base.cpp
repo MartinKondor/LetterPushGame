@@ -9,7 +9,7 @@ const void show_help() {
 
     rlutil::saveDefaultColor();
     rlutil::setColor(rlutil::WHITE);
-    cout << " (v1.1)" << endl;
+    cout << " (v1.2)" << endl;
     cout << "Made by: ";
     cout << "Martin Kondor";
     cout << " (";
@@ -76,14 +76,13 @@ const void show_grid(const char grid[GRID_HEIGHT][GRID_WIDTH]) {
 }
 
 std::vector<int> get_free_coords(const char grid[GRID_HEIGHT][GRID_WIDTH]) {
-    int rand_y = 0;
-    int rand_x = 0;
+    int rand_y = 1;
+    int rand_x = 1;
 
-    while (rand_x >= GRID_WIDTH || rand_y >= GRID_HEIGHT ||
-           grid[rand_y][rand_x] != EMPTY_CHAR) {
-        rand_y = rand() % (GRID_HEIGHT - 2);
-        rand_x = rand() % (GRID_WIDTH - 2);
-    }
+    do {
+        rand_y = rand() % GRID_HEIGHT;
+        rand_x = rand() % GRID_WIDTH;
+    } while (rand_x >= GRID_WIDTH || rand_y >= GRID_HEIGHT || grid[rand_y][rand_x] != EMPTY_CHAR);
 
     return (std::vector<int>){rand_y, rand_x};
 }
