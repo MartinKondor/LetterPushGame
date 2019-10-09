@@ -51,17 +51,25 @@ int main(const int argc, const char** args) {
 
 
     // Save letters
+    std::vector<int> rand_coords;
+
     for (i = 0; i < GOAL_WORD.length(); i++) {
-        std::vector<int> rand_coords = get_free_coords(grid);
-        grid[rand_coords[0]][rand_coords[1]] = GOAL_WORD[i];
+        rand_coords = get_free_coords(grid);
+
+        cout << rand_coords[0] << ", " << rand_coords[1] << endl;
+
+        grid[rand_coords[0]][rand_coords[1]] = GOAL_WORD[i];  // 0xC0000005 here
     }
+
+    return 0;
 
 
     // Place obstacles to random coordinates
     for (i = 0; i < N_OBSTACLE; i++) {
-        std::vector<int> rand_coords = get_free_coords(grid);
+        rand_coords = get_free_coords(grid);
         grid[rand_coords[0]][rand_coords[1]] = OBSTACLE_CHAR;
     }
+
 
 
     // Main loop

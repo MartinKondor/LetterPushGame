@@ -45,3 +45,39 @@
 
 1568036886 d:\projects\letterpushgame\hpp\base.hpp
 
+1570655375 source:c:\files\projects\letterpushgame\src\main.cpp
+	<windows.h>
+	<iostream>
+	<string>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	<vector>
+	"../hpp/rlutil.h"
+	"base.cpp"
+	"player.cpp"
+
+1570654569 c:\files\projects\letterpushgame\hpp\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1570655662 c:\files\projects\letterpushgame\src\base.cpp
+	"../hpp/base.hpp"
+
+1570654569 c:\files\projects\letterpushgame\hpp\base.hpp
+
+1570654569 c:\files\projects\letterpushgame\src\player.cpp
+	"../hpp/player.hpp"
+
+1570654569 c:\files\projects\letterpushgame\hpp\player.hpp
+

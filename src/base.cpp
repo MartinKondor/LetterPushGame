@@ -76,13 +76,13 @@ const void show_grid(const char grid[GRID_HEIGHT][GRID_WIDTH]) {
 }
 
 std::vector<int> get_free_coords(const char grid[GRID_HEIGHT][GRID_WIDTH]) {
-    int rand_y = rand() % (GRID_HEIGHT - 1);
-    int rand_x = rand() % (GRID_WIDTH - 1);
+    int rand_y = 0;
+    int rand_x = 0;
 
-    // || (rand_x == 0 && rand_y == 0)
-    while (grid[rand_y][rand_x] != EMPTY_CHAR) {
-        rand_y = rand() % (GRID_HEIGHT - 1);
-        rand_x = rand() % (GRID_WIDTH - 1);
+    while (rand_x >= GRID_WIDTH || rand_y >= GRID_HEIGHT ||
+           grid[rand_y][rand_x] != EMPTY_CHAR) {
+        rand_y = rand() % (GRID_HEIGHT - 2);
+        rand_x = rand() % (GRID_WIDTH - 2);
     }
 
     return (std::vector<int>){rand_y, rand_x};

@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="docs/images/readme.png" width="150" style="box-shadow: 1px 2px 50px rgb(70, 70, 70);">
+    <img src="docs/images/readme.png" width="250" style="box-shadow: 1px 2px 50px rgb(70, 70, 70);">
 </p>
 
 # LetterPushGame
@@ -50,7 +50,6 @@ This project is open for any kind of contribution from anyone.
 4. Make your changes
 5. Upload them
 6. Make a pull request here
-7. Profit.
 
 ## Authors
 
