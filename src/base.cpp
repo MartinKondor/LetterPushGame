@@ -82,7 +82,10 @@ std::vector<int> get_free_coords(const char grid[GRID_HEIGHT][GRID_WIDTH]) {
     do {
         rand_y = rand() % GRID_HEIGHT;
         rand_x = rand() % GRID_WIDTH;
-    } while (rand_x >= GRID_WIDTH || rand_y >= GRID_HEIGHT || grid[rand_y][rand_x] != EMPTY_CHAR);
+    } while (rand_x >= GRID_WIDTH || rand_y >= GRID_HEIGHT ||
+             grid[rand_y][rand_x] != EMPTY_CHAR ||
+             rand_x == PLAYER_DEFAULT_X ||
+             rand_y == PLAYER_DEFAULT_Y);
 
     return (std::vector<int>){rand_y, rand_x};
 }

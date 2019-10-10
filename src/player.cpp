@@ -1,7 +1,7 @@
 #include "../hpp/player.hpp"
 
 
-Player::Player(const int &x=1, const int &y=1) {
+Player::Player(const int &x=PLAYER_DEFAULT_X, const int &y=PLAYER_DEFAULT_Y) {
     this->x = x;
     this->y = y;
     this->prev_x = x;

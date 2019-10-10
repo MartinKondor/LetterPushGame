@@ -11,12 +11,14 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-#define GRID_HEIGHT 25
-#define GRID_WIDTH 50
-#define OBSTACLE_CHAR '#'
-#define PLAYER_CHAR '@'
-#define EMPTY_CHAR ' '
-#define N_OBSTACLE 150
+const unsigned int GRID_HEIGHT = 25;
+const unsigned int GRID_WIDTH = 50;
+const char OBSTACLE_CHAR = '#';
+const char PLAYER_CHAR = '@';
+const char EMPTY_CHAR = ' ';
+const unsigned int N_OBSTACLE = 150;
+const unsigned int PLAYER_DEFAULT_X = 1;
+const unsigned int PLAYER_DEFAULT_Y = 1;
 std::string GOAL_WORD = "";
 
 #include "../hpp/rlutil.h"
@@ -29,6 +31,7 @@ int main(const int argc, const char** args) {
     char grid[GRID_HEIGHT][GRID_WIDTH];
     Player player;
     int i = 0;
+    std::vector<int> rand_coords;
 
 
     // Ask for input word
@@ -39,7 +42,7 @@ int main(const int argc, const char** args) {
     cin >> GOAL_WORD;
     rlutil::resetColor();
     cout << endl;
-    system("@cls");
+    system("@cls || clear");
 
 
     // Creating the grid
@@ -51,17 +54,10 @@ int main(const int argc, const char** args) {
 
 
     // Save letters
-    std::vector<int> rand_coords;
-
     for (i = 0; i < GOAL_WORD.length(); i++) {
         rand_coords = get_free_coords(grid);
-
-        cout << rand_coords[0] << ", " << rand_coords[1] << endl;
-
         grid[rand_coords[0]][rand_coords[1]] = GOAL_WORD[i];  // 0xC0000005 here
     }
-
-    return 0;
 
 
     // Place obstacles to random coordinates
@@ -69,7 +65,6 @@ int main(const int argc, const char** args) {
         rand_coords = get_free_coords(grid);
         grid[rand_coords[0]][rand_coords[1]] = OBSTACLE_CHAR;
     }
-
 
 
     // Main loop
@@ -96,7 +91,7 @@ int main(const int argc, const char** args) {
         cout << "|                       |" << endl;
         cout << "|       ";
         rlutil::saveDefaultColor();
-        rlutil::setColor(rlutil::LIGHTGREEN);
+        rlutil::setColor(rlutil::LIGHTRED);
         cout << "CHEATER";
         rlutil::resetColor();
         cout << "         |" << endl;

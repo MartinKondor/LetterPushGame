@@ -3,7 +3,7 @@
 </p>
 
 # LetterPushGame
-[![version](https://img.shields.io/badge/version-v1.1-green.svg)](https://github.com/MartinKondor/LetterPushGame)
+[![version](https://img.shields.io/badge/version-v1.2-green.svg)](https://github.com/MartinKondor/LetterPushGame)
 [![C++](https://img.shields.io/badge/C++-17-blue.svg)](https://github.com/MartinKondor/LetterPushGame)
 [![GitHub Issues](https://img.shields.io/github/issues/MartinKondor/LetterPushGame.svg)](https://github.com/MartinKondor/LetterPushGame/issues)
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
